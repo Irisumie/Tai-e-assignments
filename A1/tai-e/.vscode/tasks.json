@@ -1,0 +1,32 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Run Tai-e Assignment (Gradle)",
+			"command": "./gradlew.bat",
+			"args": [
+				"run",
+				"--args=-cp src/test/resources/dataflow/livevar -m Assign"
+			],
+			"group": "build",
+			"isBackground": false
+		},
+		{
+			"type": "shell",
+			"label": "Gradle: build",
+			"command": "./gradlew",
+			"args": [
+				"clean",
+				"build",
+				"-x",
+				"test"
+			],
+			"group": "build",
+			"problemMatcher": ["$gradle"],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
+		}
+	]
+}

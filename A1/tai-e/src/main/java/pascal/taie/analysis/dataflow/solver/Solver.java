@@ -81,7 +81,16 @@ public abstract class Solver<Node, Fact> {
     }
 
     protected void initializeBackward(CFG<Node> cfg, DataflowResult<Node, Fact> result) {
-        // TODO - finish me
+        // 为所有结点设置初始 IN/OUT
+        for (Node node : cfg) {
+            Fact init = analysis.newInitialFact();
+            result.setInFact(node, init);
+            // OUT 也需要初始值，便于后续 meetInto 原地并入
+            result.setOutFact(node, analysis.newInitialFact());
+        }
+        // 边界条件：exit 的 OUT 设为边界 fact
+        Node exit = cfg.getExit();
+        result.setOutFact(exit, analysis.newBoundaryFact(cfg));
     }
 
     /**
